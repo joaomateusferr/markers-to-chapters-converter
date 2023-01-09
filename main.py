@@ -4,11 +4,11 @@ from tkinter import filedialog
 
 def run():
 
-    Path = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("csv files", "*.csv"),("all files", "*.*")))
-    ResultLabel.configure(text=str(Path))
+    FilePath = filedialog.askopenfilename(initialdir="/", title="Select A File", filetypes=(("csv files", "*.csv"),("all files", "*.*")))
+    ResultLabel.configure(text=str(FilePath))
     ResultLabel.pack()
     #FileSelectorButton.destroy()
-    os.startfile(str(Path))
+    os.startfile(str(FilePath))
 
 MainWindow = Tk()
 MainWindow.title("Convert DaVinci Resolve markers to YouTube chapters")
