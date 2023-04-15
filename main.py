@@ -70,25 +70,117 @@ def checkCsvFile(CsvPath):
 
     else:
         raise TypeError("Path does not exist!")
+
+def validatePath(Path):
+
+    Exists = os.path.exists(Path)
+
+    if Exists:
+
+        IsFile = os.path.isfile(Path)
+
+        if IsFile:
+
+            raise TypeError("Path lead to a file!")
+        
+        else:
+
+            return True
     
+    else:
+
+        raise TypeError("Path does not exist!")
+
+    
+def validateBooleanResponse(ResponseString):
+
+    PositiveAnswersAccepted = ['y', 'yes', 'yep']
+    NegativeAnswersAccepted = ['n', 'no', 'nop']
+
+    ResponseString = ResponseString.lower()
+
+    if ResponseString in PositiveAnswersAccepted: return True
+    if ResponseString in NegativeAnswersAccepted: return False
+
+    raise TypeError("Invalid answer!\nAccepted answers are:\n"+ str(PositiveAnswersAccepted) + "\n" + str(NegativeAnswersAccepted))
+
+def stringYoutubeChapters(YoutubeChapters, ExportColor):
+
+    StringYoutubeChapters = ''
+
+    for Chapter in YoutubeChapters:
+
+        StringYoutubeChapters = StringYoutubeChapters + Chapter['Time'] + " - " + Chapter['Notes'] 
+
+        if ExportColor:
+            StringYoutubeChapters = StringYoutubeChapters + " # " + Chapter['Color'] + "\n"
+        else:
+            StringYoutubeChapters = "\n"
+
+    return StringYoutubeChapters
+
+def exportYoutubeChapters(StringYoutubeChapters):
+
+    print(str(YoutubeChapters))
+
                 
 def main():
 
-    FilePath = 'timeline1.csv'
-    ExportColor = False
-    MoreThanAnHour = False
-    ExportFile = False
-    ExportFilePath = ''
+    FilePath =  ExportFilePath = ''
+    ExportColor = MoreThanAnHour = ExportFile = False
+    YoutubeChapters = []
 
-    try:
-
-        FileOk = checkCsvFile(FilePath)
+    FilePath = input("Enter the csv path: ")
     
-        if FileOk :
-            YoutubeChapters = parseCsvFile(FilePath, MoreThanAnHour, ExportColor)
-            #print(str(YoutubeChapters))
-
+    try:
+        checkCsvFile(FilePath)
     except Exception as Ex: 
         print("Something went wrong ...\n"+ str(Ex))
+
+    ExportColor = input("Do you want to export marker colors if they exist? (y/n) ")
+
+    try:
+        ExportColor = validateBooleanResponse(ExportColor)
+    except Exception as Ex: 
+        print("Something went wrong ...\n"+ str(Ex))
+
+    MoreThanAnHour = input("Is the timeline longer than an hour? (y/n) ")
+
+    try:
+        MoreThanAnHour = validateBooleanResponse(MoreThanAnHour)
+    except Exception as Ex: 
+        print("Something went wrong ...\n"+ str(Ex))
+
+    ExportFile = input("Do you want to export the chapters as a text file? (y/n) ")
+
+    try:
+        ExportFile = validateBooleanResponse(ExportFile)
+    except Exception as Ex: 
+        print("Something went wrong ...\n"+ str(Ex))
+
+    if ExportFile:
+
+        ExportFilePath = input("Enter the export path ")
+
+        try:
+            ExportFilePath = validatePath(ExportFilePath)
+        except Exception as Ex: 
+            print("Something went wrong ...\n"+ str(Ex))
+
+    try:
+        YoutubeChapters = parseCsvFile(FilePath, MoreThanAnHour, ExportColor)
+    except Exception as Ex: 
+        print("Something went wrong ...\n"+ str(Ex))
+
+    if not YoutubeChapters:
+        print("Something went wrong ...\nYoutube chapters is empty!")
+
+    StringYoutubeChapters = stringYoutubeChapters(YoutubeChapters, ExportColor)
+
+    if ExportFile:        
+        exportYoutubeChapters(StringYoutubeChapters, ExportFilePath)
+    else:
+        print(StringYoutubeChapters)
+        
 
 main()
