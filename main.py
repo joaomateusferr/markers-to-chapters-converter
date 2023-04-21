@@ -232,7 +232,7 @@ def main():
 
         Argv = sys.argv[1:]
 
-        if Argv:    #if it contains arguments use command line utility mode
+        if Argv:    #if contains arguments use command line utility mode
 
             try:
                 Options, Arguments = getopt.getopt(Argv, OptionsString)
@@ -241,7 +241,10 @@ def main():
 
             for Options, Arguments in Options:
                 
-                if Options in ['-f']:
+                if Options in ['-h', '-?']:
+                    showManual()
+                    sys.exit(0)
+                elif Options in ['-f']:
                     FilePath = Arguments
                 elif Options in ['-m']:
                     MoreThanAnHour = True
@@ -250,9 +253,6 @@ def main():
                 elif Options in ['-e']:
                     ExportFile = True
                     ExportFilePath = Arguments
-                elif Options in ['-h', '-?']:
-                    showManual()
-                    sys.exit(0)
 
         else:   #otherwise requires user input in the terminal
 
