@@ -2,6 +2,7 @@ import sys
 import getopt
 import csv
 import os.path
+from pathlib import Path
 
 def parseCsvFile(CsvPath, MoreThanAnHour, ExportColor):
 
@@ -73,21 +74,15 @@ def checkCsvFile(CsvPath):
     else:
         raise TypeError("Path does not exist!")
 
-def validatePath(Path):
+def validatePath(FilePath):
 
-    Exists = os.path.exists(Path)
+    Basename = os.path.dirname(FilePath)
 
-    if Exists:
+    Dir = Path(Basename)
 
-        IsFile = os.path.isfile(Path)
+    if Dir.exists():
 
-        if IsFile:
-
-            raise TypeError("Path lead to a file!")
-        
-        else:
-
-            return True
+        return FilePath
     
     else:
 
@@ -129,14 +124,106 @@ def stringYoutubeChapters(YoutubeChapters, ExportColor):
     return StringYoutubeChapters
 
 def exportYoutubeChapters(StringYoutubeChapters, ExportFilePath):
-
+    #do it!
     print(str(StringYoutubeChapters))
 
+
+def validateInputs(FilePath, ExportColor, MoreThanAnHour, ExportFile, ExportFilePath):
+
+    Result = {}
+    
+    try:
+        checkCsvFile(FilePath)
+    except Exception as Ex: 
+        print("Something went wrong(2) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    Result['FilePath'] = FilePath
+
+    try:
+        ExportColor = validateBooleanResponse(ExportColor)
+    except Exception as Ex: 
+        print("Something went wrong(3) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    Result['ExportColor'] = ExportColor
+
+    try:
+        MoreThanAnHour = validateBooleanResponse(MoreThanAnHour)
+    except Exception as Ex: 
+        print("Something went wrong(4) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    Result['MoreThanAnHour'] = MoreThanAnHour
+
+    try:
+        ExportFile = validateBooleanResponse(ExportFile)
+    except Exception as Ex: 
+        print("Something went wrong(5) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    Result['ExportFile'] = ExportFile
+
+    if ExportFile:
+
+        try:
+            ExportFilePath = validatePath(ExportFilePath)
+        except Exception as Ex: 
+            print("Something went wrong(6) ...\n"+ str(Ex))
+            sys.exit(0)
+
+        Result['ExportFilePath'] = ExportFilePath
+
+    return Result
+
+def run(FilePath, ExportColor, MoreThanAnHour, ExportFile, ExportFilePath):
+
+    try:
+        Result = validateInputs(FilePath, ExportColor, MoreThanAnHour, ExportFile, ExportFilePath)
+    except Exception as Ex: 
+        print("Something went wrong(7) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    print(Result)
+
+    try:
+        YoutubeChapters = parseCsvFile(Result['FilePath'], Result['MoreThanAnHour'],  Result['ExportColor'])
+    except Exception as Ex: 
+        print("Something went wrong(8) ...\n"+ str(Ex))
+        sys.exit(0)
+
+    if not YoutubeChapters:
+        print("Something went wrong(9) ...\nYoutube chapters is empty!")
+        sys.exit(0)
+
+    StringYoutubeChapters = stringYoutubeChapters(YoutubeChapters, Result['ExportColor'])
+
+    if ExportFile:
+
+        try:
+            exportYoutubeChapters(StringYoutubeChapters, Result['ExportColor'])
+        except Exception as Ex: 
+            print("Something went wrong(10) ...\n"+ str(Ex))
+            sys.exit(0)
+                
+    else:
+        print(StringYoutubeChapters)
+
+def showManual():
+    #do it!
+    print('Show manual!')
+
+def openGui():
+    #do it!
+    print('Using gui!')
                 
 def main():
 
+    #mode 0 use terminal, command line utility or user input
+    #mode 1 use gui
     Mode = 0
-    OptionsString = 'f:h:c:e'
+
+    OptionsString = 'f:e:mch?'
     FilePath = ExportFilePath = ''
     ExportColor = MoreThanAnHour = ExportFile = False
     YoutubeChapters = []
@@ -145,26 +232,29 @@ def main():
 
         Argv = sys.argv[1:]
 
-        if Argv:
+        if Argv:    #if it contains arguments use command line utility mode
 
             try:
                 Options, Arguments = getopt.getopt(Argv, OptionsString)
             except Exception as Ex: 
-                print("Something went wrong ...\n"+ str(Ex))
+                print("Something went wrong(0) ...\n"+ str(Ex))
 
             for Options, Arguments in Options:
                 
                 if Options in ['-f']:
                     FilePath = Arguments
-                elif Options in ['-h']:
-                    MoreThanAnHour = bool(Arguments)
+                elif Options in ['-m']:
+                    MoreThanAnHour = True
                 elif Options in ['-c']:
-                    ExportColor = bool(Arguments)
+                    ExportColor = True
                 elif Options in ['-e']:
                     ExportFile = True
                     ExportFilePath = Arguments
+                elif Options in ['-h', '-?']:
+                    showManual()
+                    sys.exit(0)
 
-        else:
+        else:   #otherwise requires user input in the terminal
 
             FilePath = input("Enter the csv path: ")
             ExportColor = input("Do you want to export marker colors if they exist? (y/n) ")
@@ -175,56 +265,19 @@ def main():
                 ExportFile = validateBooleanResponse(ExportFile)
             except Exception as Ex: 
                 print("Something went wrong(1) ...\n"+ str(Ex))
+                sys.exit(0)
 
             if ExportFile:
                 ExportFilePath = input("Enter the export path: ")
             else:
                 ExportFilePath = ''
+    
+        
+        run(FilePath, ExportColor, MoreThanAnHour, ExportFile, ExportFilePath)
 
     else:
-        print('Using gui!')
 
-    try:
-        checkCsvFile(FilePath)
-    except Exception as Ex: 
-        print("Something went wrong(2) ...\n"+ str(Ex))
-
-    try:
-        ExportColor = validateBooleanResponse(ExportColor)
-    except Exception as Ex: 
-        print("Something went wrong(3) ...\n"+ str(Ex))
-
-    try:
-        MoreThanAnHour = validateBooleanResponse(MoreThanAnHour)
-    except Exception as Ex: 
-        print("Something went wrong(4) ...\n"+ str(Ex))
-
-    try:
-        ExportFile = validateBooleanResponse(ExportFile)
-    except Exception as Ex: 
-        print("Something went wrong(5) ...\n"+ str(Ex))
-
-    if ExportFilePath:
-
-        try:
-            ExportFilePath = validatePath(ExportFilePath)
-        except Exception as Ex: 
-            print("Something went wrong(6) ...\n"+ str(Ex))
-
-    try:
-        YoutubeChapters = parseCsvFile(FilePath, MoreThanAnHour, ExportColor)
-    except Exception as Ex: 
-        print("Something went wrong(7) ...\n"+ str(Ex))
-
-    if not YoutubeChapters:
-        print("Something went wrong(8) ...\nYoutube chapters is empty!")
-
-    StringYoutubeChapters = stringYoutubeChapters(YoutubeChapters, ExportColor)
-
-    if ExportFile:        
-        exportYoutubeChapters(StringYoutubeChapters, ExportFilePath)
-    else:
-        print(StringYoutubeChapters)
+        openGui()
         
 
 main()
