@@ -40,10 +40,10 @@ def parseCsvFile(CsvPath, MoreThanAnHour, ExportColor):
             RowTimeArray = RowTime.split(':')
 
             if MoreThanAnHour:
-                RowTimeArray.pop(3)
+                RowTimeArray.pop(3) #remove marker frames
             else:
-                RowTimeArray.pop(0)
-                RowTimeArray.pop(2)
+                RowTimeArray.pop(0) #remove marker hour
+                RowTimeArray.pop(2) #remove marker frames
 
             ChapterRow['Time'] = ':'.join(RowTimeArray)
 
