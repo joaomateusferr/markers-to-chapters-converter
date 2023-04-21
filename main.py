@@ -184,8 +184,6 @@ def run(FilePath, ExportColor, MoreThanAnHour, ExportFile, ExportFilePath):
         print("Something went wrong(7) ...\n"+ str(Ex))
         sys.exit(0)
 
-    print(Result)
-
     try:
         YoutubeChapters = parseCsvFile(Result['FilePath'], Result['MoreThanAnHour'],  Result['ExportColor'])
     except Exception as Ex: 
