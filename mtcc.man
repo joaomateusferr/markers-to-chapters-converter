@@ -1,0 +1,38 @@
+.\" Manpage for markers-to-chapters-converter.
+.\" Contact joaomateusferr@gmail.com to correct errors or typos.
+
+.TH mtcc 1 "1 May 2023" "1.0" "General Commands "
+
+.SH NAME
+mtcc \- DaVinci Resolve marks to YouTube chapters converter
+
+.SH SYNOPSIS
+.B mtcc
+[\fB\-f\fR \fIfile_path\fR]
+[\fB\-e\fR \fIexport_path\fR]
+[\fB\-m\fR]
+[\fB\-c\fR]
+[\fB\-v\fR]
+[\fB\-h\fR]
+[\fB\-?\fR]
+
+.SH DESCRIPTION
+.B mtcc
+Convert DaVinci Resolve marks to YouTube chapters.
+
+.SH OPTIONS
+.TP
+.B \-h ,  \-?
+Display this help information.
+.TP
+\fB\-f\fR \fIfile_path\fR
+DaVinci Resolve marks csv file path to parse.
+
+.SH SEE ALSO
+python(1)
+
+.SH BUGS
+No known bugs.
+
+.SH AUTHOR
+Joao Ferreira (joaomateusferr@gmail.com)
