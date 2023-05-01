@@ -211,6 +211,10 @@ def showManual():
     #do it!
     print('Show manual!')
 
+def showVersion():
+    #do it!
+    print('Show version!')
+
 def openGui():
     #do it!
     print('Using gui!')
@@ -221,7 +225,7 @@ def main():
     #mode 1 use gui
     Mode = 0
 
-    OptionsString = 'f:e:mch?'
+    OptionsString = 'f:e:mcvh?'
     FilePath = ExportFilePath = ''
     ExportColor = MoreThanAnHour = ExportFile = False
     YoutubeChapters = []
@@ -241,6 +245,9 @@ def main():
                 
                 if Options in ['-h', '-?']:
                     showManual()
+                    sys.exit(0)
+                elif Options in ['-v']:
+                    showVersion()
                     sys.exit(0)
                 elif Options in ['-f']:
                     FilePath = Arguments
