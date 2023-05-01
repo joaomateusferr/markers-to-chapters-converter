@@ -4,7 +4,7 @@
 .TH mtcc 1 "1 May 2023" "1.0" "General Commands "
 
 .SH NAME
-mtcc \- DaVinci Resolve marks to YouTube chapters converter
+mtcc \- DaVinci Resolve markers to YouTube chapters converter
 
 .SH SYNOPSIS
 .B mtcc
@@ -22,11 +22,20 @@ Convert DaVinci Resolve marks to YouTube chapters.
 
 .SH OPTIONS
 .TP
-.B \-h ,  \-?
+.B \-h , \-?
 Display this help information.
 .TP
 \fB\-f\fR \fIfile_path\fR
 DaVinci Resolve marks csv file path to parse.
+.TP
+.B \-m   
+If DaVinci Resolve timeline is more than one hour, the parameter -m must be used.
+.TP
+.B \-c
+If you want to export the colors from the DaVinci Resolve timeline markers, the parameter -c must be used.
+.TP
+\fB\-e\fR \fIexport_path\fR
+If you want to export the YouTube chapters as a .txt text file, the parameter -e must be used followed by the path for the file to be exported.
 
 .SH SEE ALSO
 python(1)
