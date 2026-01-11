@@ -99,3 +99,62 @@ button:disabled {
 button:hover:enabled {
     background: var(--green-hover);
 }
+
+.checkbox-wrapper {
+    margin-top: 1.5rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-wrapper label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--green-hover);
+    font-weight: 500;
+}
+
+.checkbox-ui {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--green);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.checkbox-ui::after {
+    content: "✓";
+    font-size: 16px;
+    color: white;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper input:checked + label .checkbox-ui {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.checkbox-wrapper input:checked + label .checkbox-ui::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.checkbox-wrapper label:hover .checkbox-ui {
+    border-color: var(--green-hover);
+}
+
+.checkbox-wrapper input:focus + label .checkbox-ui {
+    outline: 3px solid var(--green-light);
+    outline-offset: 2px;
+}

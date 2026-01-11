@@ -6,6 +6,14 @@
     <label for="csv">Select file</label>
     <div class="file-name" id="file-name">No file selected</div>
 
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="hour-plus" name="hour-plus" value="1">
+        <label for="hour-plus">
+            <span class="checkbox-ui"></span>
+            <span class="checkbox-text">More than an hour?</span>
+        </label>
+    </div>
+
     <div class="actions">
         <button type="submit" id="submit-btn" disabled>Process</button>
     </div>
