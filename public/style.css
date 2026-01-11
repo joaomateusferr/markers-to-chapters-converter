@@ -29,7 +29,7 @@ body {
     justify-content: center;
 }
 
-.upload-box:hover {
+.box:hover {
     border-color: var(--green-hover);
     transform: scale(1.01);
 }
@@ -38,6 +38,14 @@ h1 {
     margin-bottom: 1rem;
     color: var(--green);
     font-size: 2rem;
+}
+
+.error {
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    color: #b71c1c;
+    padding: 0.8rem; 
+    border-radius: 8px;
 }
 
 input[type="file"] {
