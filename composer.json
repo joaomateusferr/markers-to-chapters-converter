@@ -1,6 +1,6 @@
 {
     "name": "joaomateusferr/markers-to-chapters-converter",
-    "description": "A simple way  to convert DaVinci Resolve marks to YouTube chapters",
+    "description": "A simple way to convert DaVinci Resolve markers to YouTube chapters",
     "type": "project",
     "license": "MIT",
     "autoload": {
