@@ -35,8 +35,8 @@ h1.error {
 
 input[type="file"] {
     background-color: white;
-    border: 2px dashed var(--green); /* Borda pontilhada moderna */
-    padding: 50px 20px; /* Mais espaço vertical para parecer uma área de drop */
+    border: 2px dashed var(--green);
+    padding: 50px 20px;
     border-radius: 15px;
     width: 100%;
     margin-bottom: 1.5rem;
@@ -103,25 +103,25 @@ button:disabled {
 .result {
     background-color: #ffffff;
     border: 1px solid var(--gray);
-    border-left: 8px solid var(--green); /* Borda lateral mais espessa */
+    border-left: 8px solid var(--green);
     border-radius: 8px;
-    padding: 1.5rem 2rem !important; /* Mais respiro interno */
+    padding: 1.5rem 2rem !important;
     margin: 2rem auto !important;
     text-align: left;
     max-height: 400px;
     overflow-y: auto;
     color: var(--green);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    display: inline-block; /* Ajusta ao conteúdo */
-    min-width: 80%; /* Garante que não fique muito estreito */
+    display: inline-block;
+    min-width: 80%;
 }
 
 .result .row {
     padding: 10px 0;
     justify-content: left !important;
-    margin: 0 !important; /* Limpa margens negativas do Bootstrap */
+    margin: 0 !important;
     border-bottom: 1px solid var(--green-light);
-    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para timestamps */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .result .row:last-child {

@@ -1,5 +1,5 @@
 <form action="index.php" method="post" enctype="multipart/form-data">
-    <div class="row"><h1>Send your markers CSV file</h1></div>
+    <div class="row"><h1>Upload your markes CSV file</h1></div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <input type="file" name="csv" id="csv" accept=".csv,text/csv" required>
