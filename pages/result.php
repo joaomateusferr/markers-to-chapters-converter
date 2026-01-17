@@ -24,7 +24,7 @@
 
             <div class="row">
 
-                <spam class="container col-md-8 result">
+                <spam class="container col-md-10 result">
 
                     <?php
 
