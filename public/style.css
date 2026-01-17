@@ -3,165 +3,140 @@
     --green-light: #e8f5e9;
     --green-hover: #1b5e20;
     --gray: #ccc;
+    --red-light: #c62828;
+    --red: #b71c1c;
 }
 
 body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #f1f8e9, #ffffff);
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.box {
-    width: 90%;
-    height: 90%;
-    background: #fff;
-    border: 2px dashed var(--green);
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.box:hover {
-    border-color: var(--green-hover);
-    transform: scale(1.01);
-}
-
-h1 {
-    margin-bottom: 1rem;
+    background-color: var(--green-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--green);
-    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.result {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: var(--green-hover);
-    font-weight: 500;
+h1, h1.error {
+    color: var(--green) !important;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-.error {
-    background: #ffebee;
-    border: 1px solid #ef9a9a;
-    color: #b71c1c;
-    padding: 0.8rem;
-    border-radius: 8px;
+h1.error {
+    Color: var(--red) !important;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px dashed var(--red-light);
 }
 
 input[type="file"] {
-    display: none;
-}
-
-label {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background: var(--green);
-    color: #fff;
-    border-radius: 8px;
+    background-color: white;
+    border: 2px dashed var(--green); /* Borda pontilhada moderna */
+    padding: 50px 20px; /* Mais espaço vertical para parecer uma área de drop */
+    border-radius: 15px;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease-in-out;
+    color: var(--green);
+    text-align: center;
     cursor: pointer;
+    position: relative;
+}
+
+input[type="file"]:hover {
+    background-color: #ffffff;
+    border-color: var(--green-hover);
+    box-shadow: 0 0 15px rgba(46, 125, 50, 0.1);
+    transform: translateY(-2px);
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-right: 15px;
     font-weight: 600;
-    transition: background 0.3s ease;
-    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-label:hover {
-    background: var(--green-hover);
-}
-
-.file-name {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    color: var(--green-hover);
-    font-weight: 500;
-}
-
-.actions {
-    margin-top: 2rem;
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--green-hover);
 }
 
 button {
-    padding: 1rem 2rem;
-    background: var(--green);
-    color: #fff;
+    background-color: var(--green);
+    color: white;
     border: none;
+    padding: 12px 30px;
     border-radius: 8px;
-    cursor: pointer;
+    font-size: 1rem;
     font-weight: 600;
-    transition: background 0.3s ease;
-    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    width: 100%;
+    margin: 15px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+button:hover {
+    background-color: var(--green-hover);
+}
+
+button:active {
+    transform: scale(0.98);
 }
 
 button:disabled {
-    background: var(--gray);
+    background-color: var(--gray);
     cursor: not-allowed;
+    box-shadow: none;
 }
 
-button:hover:enabled {
-    background: var(--green-hover);
+.result {
+    background-color: #ffffff;
+    border: 1px solid var(--gray);
+    border-left: 8px solid var(--green); /* Borda lateral mais espessa */
+    border-radius: 8px;
+    padding: 1.5rem 2rem !important; /* Mais respiro interno */
+    margin: 2rem auto !important;
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+    color: var(--green);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: inline-block; /* Ajusta ao conteúdo */
+    min-width: 80%; /* Garante que não fique muito estreito */
 }
 
-.checkbox-wrapper {
-    margin-top: 1.5rem;
+.result .row {
+    padding: 10px 0;
+    justify-content: left !important;
+    margin: 0 !important; /* Limpa margens negativas do Bootstrap */
+    border-bottom: 1px solid var(--green-light);
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para timestamps */
 }
 
-.checkbox-wrapper input[type="checkbox"] {
-    display: none;
+.result .row:last-child {
+    border-bottom: none;
 }
 
-.checkbox-wrapper label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    background: none;
-    padding: 0;
-    font-size: 1rem;
-    color: var(--green-hover);
-    font-weight: 500;
+label {
+    font-weight: 600;
+    color: var(--green);
+    margin-bottom: 1rem;
+    display: block;
 }
 
-.checkbox-ui {
-    width: 22px;
-    height: 22px;
-    border: 2px solid var(--green);
-    border-radius: 6px;
-    display: inline-flex;
-    align-items: center;
+.row {
+    margin-left: 0;
+    margin-right: 0;
     justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.checkbox-ui::after {
-    content: "✓";
-    font-size: 16px;
-    color: white;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.2s ease;
-}
-
-.checkbox-wrapper input:checked + label .checkbox-ui {
-    background: var(--green);
-    border-color: var(--green);
-}
-
-.checkbox-wrapper input:checked + label .checkbox-ui::after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.checkbox-wrapper label:hover .checkbox-ui {
-    border-color: var(--green-hover);
-}
-
-.checkbox-wrapper input:focus + label .checkbox-ui {
-    outline: 3px solid var(--green-light);
-    outline-offset: 2px;
 }

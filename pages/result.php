@@ -16,23 +16,48 @@
 
         if(!empty($Chapters)){
 
-            echo '<h1>Result</h1><spam class="result">';
+            ?>
 
-            foreach($Chapters as $Time => $Note){
+            <div class="row">
+                <h1>Result</h1>
+            </div>
 
-                echo $Time.' - '.$Note.'<br>';
+            <div class="row">
 
-            }
+                <spam class="container col-md-8 result">
 
-            echo '</spam>';
+                    <?php
+
+                        foreach($Chapters as $Time => $Note){
+
+                            echo '<div class="row">'.$Time.' - '.$Note.'</div>';
+
+                        }
+
+                    ?>
+
+                </spam>
+
+            </div">
+
+            <?php
 
         }
 
     } catch (Exception $Exception) {
 
-        echo '<h1 class="error">'.$Exception->getMessage().'</h1>';
-        exit;
+        echo '<div class="row"><h1 class="error">'.$Exception->getMessage().'</h1></div>';
 
     }
+
+    ?>
+
+    <div class="row">
+        <div class="col-md-4">
+            <button onclick="window.location.href = window.location.pathname;">Reload</button>
+        </div>
+    </div>
+
+    <?php
 
 ?>
