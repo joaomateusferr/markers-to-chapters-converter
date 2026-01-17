@@ -40,11 +40,18 @@ h1 {
     font-size: 2rem;
 }
 
+.result {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--green-hover);
+    font-weight: 500;
+}
+
 .error {
     background: #ffebee;
     border: 1px solid #ef9a9a;
     color: #b71c1c;
-    padding: 0.8rem; 
+    padding: 0.8rem;
     border-radius: 8px;
 }
 
