@@ -8,7 +8,7 @@ class Marker {
 
     private array $Chapters = [];
 
-    public function __construct(string $CsvPath, bool $MoreThanAnHour) {
+    public function __construct(string $CsvPath) {
 
         try{
 
@@ -42,9 +42,7 @@ class Marker {
 
                             $Tokens = explode(':', $Value);
                             unset($Tokens[array_key_last($Tokens)]);
-
-                            if(!$MoreThanAnHour)
-                                unset($Tokens[0]);
+                            unset($Tokens[0]);
 
                             $Value = implode(':', $Tokens);
 

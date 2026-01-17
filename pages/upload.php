@@ -1,22 +1,17 @@
 <form action="index.php" method="post" enctype="multipart/form-data">
 
-    <h1>Send your markers CSV file</h1>
+    <center>
 
-    <input type="file" name="csv" id="csv" accept=".csv,text/csv" required>
-    <label for="csv">Select file</label>
-    <div class="file-name" id="file-name">No file selected</div>
+        <h1>Send your markers CSV file</h1>
 
-    <div class="checkbox-wrapper">
-        <input type="checkbox" id="hour-plus" name="hour-plus" value="1">
-        <label for="hour-plus">
-            <span class="checkbox-ui"></span>
-            <span class="checkbox-text">More than an hour?</span>
-        </label>
-    </div>
+        <input type="file" name="csv" id="csv" accept=".csv,text/csv" required>
+        <label for="csv">Select file</label>
+        <div class="file-name" id="file-name">No file selected</div>
+        <div class="actions">
+            <button type="submit" id="submit-btn" disabled>Process</button>
+        </div>
 
-    <div class="actions">
-        <button type="submit" id="submit-btn" disabled>Process</button>
-    </div>
+    </center>
 
 </form>
 

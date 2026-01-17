@@ -11,8 +11,7 @@
             throw new Exception('Upload issue!');
 
         $CsvPath = (new UploadFileParser($_FILES))->getPath();
-        $MoreThanAnHour = empty($_POST['hour-plus']) ? false : true;
-        $Marker = new Marker($CsvPath, $MoreThanAnHour);
+        $Marker = new Marker($CsvPath);
         $Chapters = $Marker->getChapters();
 
         if(!empty($Chapters)){
