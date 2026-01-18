@@ -1,0 +1,23 @@
+FROM ubuntu:24.04
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive TZ=America/Sao_Paulo apt-get -y install tzdata
+RUN apt-get -y install vim nano git apache2 php composer libapache2-mod-php php-soap php-gd
+
+COPY ./deploy-config.sh /
+RUN sh /deploy-config.sh
+RUN rm /deploy-config.sh
+
+COPY ./repo-config.sh /
+RUN sh /repo-config.sh
+RUN rm /repo-config.sh
+
+RUN echo "<?php phpinfo(); ?>" >> /var/www/html/index.php
+RUN rm -rf /var/www/html/index.html
+
+EXPOSE 80
+EXPOSE 443
+
+VOLUME /var/www/html/
+
+CMD ["bash", "apachectl", "-D", "FOREGROUND"]
