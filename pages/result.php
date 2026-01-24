@@ -3,7 +3,6 @@
 
     use App\Services\UploadFileParser;
     use App\Services\Marker;
-    use \Exception;
 
     try{
 
